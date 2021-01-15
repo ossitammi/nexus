@@ -30,10 +30,11 @@
     "webpack": "^5.10.3",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.7.2"
+    "webpack-merge": "^5.7.3"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
+    "express": "^4.17.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   }

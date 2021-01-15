@@ -4,10 +4,9 @@
  * React/ReactDOM are added as external libraries, so they are not included in the bundle.
  */
 
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const path = require('path');
 const common = require('./webpack.common.js');
-const webpack = require('webpack');
 
 module.exports = merge(common, {
   output: {
@@ -15,8 +14,5 @@ module.exports = merge(common, {
     publicPath: '/',
     path: path.resolve(__dirname, 'dist')
   },
-  mode: 'production',
-  plugins: [
-    new webpack.DefinePlugin(envKeys)
-  ]
+  mode: 'production'
 });
