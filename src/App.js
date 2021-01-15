@@ -54,9 +54,23 @@ const gridSize = 4
 const App = () => {
   const classes = useStyles();
 
+  const calcBoxDim = () => {
+    const minDim = Math.min(window.innerWidth, window.innerHeight);
+    const maxDim = Math.max(window.innerWidth, window.innerHeight);
+    let tempDim = minDim;
+    if (minDim * 2 > maxDim) tempDim = maxDim / 2
+    return tempDim;
+  };
+
+  const calcOrientation = () => {
+    let tempOrientation = 'column';
+    if (window.innerWidth > window.innerHeight) tempOrientation = 'row';
+    return tempOrientation
+  };
+
   const [gameOn, setGameOn] = useState(true);
-  const [boxDim, setBoxDim] = useState(null);
-  const [orientation, setOrientation] = useState('row');
+  const [boxDim, setBoxDim] = useState(calcBoxDim());
+  const [orientation, setOrientation] = useState(calcOrientation());
 
   const [grid, setGrid] = useState(() => {
     return Array(gridSize).fill(0).map(() => Array(gridSize).fill(0));;
@@ -85,15 +99,8 @@ const App = () => {
 
   useEffect(() => {
     window.onresize = () => {
-      const minDim = Math.min(window.innerWidth, window.innerHeight);
-      const maxDim = Math.max(window.innerWidth, window.innerHeight);
-      let tempDim = minDim;
-      let tempOrientation = 'column';
-      if (minDim * 2 > maxDim) tempDim = maxDim / 2
-      setBoxDim(tempDim);
-
-      if (window.innerWidth > window.innerHeight) tempOrientation = 'row';
-      setOrientation(tempOrientation);
+      setBoxDim(calcBoxDim);
+      setOrientation(calcOrientation());
     };
 
     return () => {
