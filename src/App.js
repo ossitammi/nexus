@@ -35,7 +35,10 @@ const useStyles = makeStyles({
   },
   bloxes: {
     width: '100%',
-    height: '50%'
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   column: {
     display: 'flex',
@@ -78,10 +81,19 @@ const App = () => {
     }
   }, [grid]);
 
+  console.log(window.innerHeight, window.innerWidth);
+  const minDim = Math.min(window.innerWidth, window.innerHeight);
+  const maxDim = Math.max(window.innerWidth, window.innerHeight);
+  let boxDim = minDim;
+  let orientation = 'column'
+
+  if (minDim * 2 > maxDim) boxDim = maxDim / 2
+  if (window.innerWidth > window.innerHeight) orientation = 'row';
+
   return (
     <div className={classes.appContainer}>
-      <div className={classes.bloxes} style={{ backgroundColor: 'purple' }}>
-        <div className={classes.row}>
+      <div className={classes.bloxes} style={{ flexDirection: orientation }}>
+        <div className={classes.row} style={{ width: boxDim, height: boxDim}}>
           {grid.map((rows, i) => {
             return (
               <div key={i} className={classes.column}>
@@ -100,7 +112,7 @@ const App = () => {
             );
           })}
         </div>
-        <div className={classes.row}>
+        <div className={classes.row} style={{ width: boxDim, height: boxDim}}>
           {drawGrid.map((rows, i) => {
             return (
               <div key={i} className={classes.column}>
