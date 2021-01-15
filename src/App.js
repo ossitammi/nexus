@@ -55,6 +55,8 @@ const App = () => {
   const classes = useStyles();
 
   const [gameOn, setGameOn] = useState(true);
+  const [boxDim, setBoxDim] = useState(null);
+  const [orientation, setOrientation] = useState('row');
 
   const [grid, setGrid] = useState(() => {
     return Array(gridSize).fill(0).map(() => Array(gridSize).fill(0));;
@@ -81,14 +83,23 @@ const App = () => {
     }
   }, [grid]);
 
-  console.log(window.innerHeight, window.innerWidth);
-  const minDim = Math.min(window.innerWidth, window.innerHeight);
-  const maxDim = Math.max(window.innerWidth, window.innerHeight);
-  let boxDim = minDim;
-  let orientation = 'column'
+  useEffect(() => {
+    window.onresize = () => {
+      const minDim = Math.min(window.innerWidth, window.innerHeight);
+      const maxDim = Math.max(window.innerWidth, window.innerHeight);
+      let tempDim = minDim;
+      let tempOrientation = 'column';
+      if (minDim * 2 > maxDim) tempDim = maxDim / 2
+      setBoxDim(tempDim);
 
-  if (minDim * 2 > maxDim) boxDim = maxDim / 2
-  if (window.innerWidth > window.innerHeight) orientation = 'row';
+      if (window.innerWidth > window.innerHeight) tempOrientation = 'row';
+      setOrientation(tempOrientation);
+    };
+
+    return () => {
+      window.onresize = null;
+    };
+  }, []);
 
   return (
     <div className={classes.appContainer}>
