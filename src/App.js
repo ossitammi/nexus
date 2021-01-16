@@ -4,20 +4,21 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   appContainer: {
     height: '100%',
-    width: '100%',
-    backgroundColor: 'cyan'
-  },
-  blockContainer: {
-    width: '40%',
-    height: '40%'
+    width: '100%'
   },
   row: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     width: '100%',
-    height: '100%',
-    backgroundColor: 'yellow'
+    height: '100%'
+  },
+  bloxesRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '90',
+    height: '90%'
   },
   block: {
     height: '20px',
@@ -34,18 +35,17 @@ const useStyles = makeStyles({
     backgroundColor: 'yellow'
   },
   bloxes: {
-    width: '100%',
-    height: '100%',
+    width: '95%',
+    height: '95%',
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center'
   },
   column: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    width: '25%',
-    backgroundColor: 'green'
+    width: '25%'
   }
 });
 
@@ -111,7 +111,7 @@ const App = () => {
   return (
     <div className={classes.appContainer}>
       <div className={classes.bloxes} style={{ flexDirection: orientation }}>
-        <div className={classes.row} style={{ width: boxDim, height: boxDim}}>
+        <div className={classes.bloxesRow} style={{ width: boxDim, height: boxDim, border: '1px solid black', margin: '5px'}}>
           {grid.map((rows, i) => {
             return (
               <div key={i} className={classes.column}>
@@ -130,7 +130,7 @@ const App = () => {
             );
           })}
         </div>
-        <div className={classes.row} style={{ width: boxDim, height: boxDim}}>
+        <div className={classes.bloxesRow} style={{ width: boxDim, height: boxDim, border: '1px solid black', margin: '5px'}}>
           {drawGrid.map((rows, i) => {
             return (
               <div key={i} className={classes.column}>
