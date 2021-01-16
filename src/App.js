@@ -11,12 +11,14 @@ const useStyles = makeStyles({
     flexDirection: 'row',
     justifyContent: 'center',
     width: '100%',
-    height: '100%'
+    height: '100%',
+    border: '1px solid grey'
   },
   bloxesRow: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+    alignItems: 'space-around',
     width: '90',
     height: '90%'
   },
@@ -35,8 +37,8 @@ const useStyles = makeStyles({
     backgroundColor: 'yellow'
   },
   bloxes: {
-    width: '95%',
-    height: '95%',
+    width: '100%',
+    height: '100%',
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center'
@@ -59,7 +61,7 @@ const App = () => {
     const maxDim = Math.max(window.innerWidth, window.innerHeight);
     let tempDim = minDim;
     if (minDim * 2 > maxDim) tempDim = maxDim / 2
-    return tempDim;
+    return tempDim * 0.9;
   };
 
   const calcOrientation = () => {
@@ -111,7 +113,7 @@ const App = () => {
   return (
     <div className={classes.appContainer}>
       <div className={classes.bloxes} style={{ flexDirection: orientation }}>
-        <div className={classes.bloxesRow} style={{ width: boxDim, height: boxDim, border: '1px solid black', margin: '5px'}}>
+        <div className={classes.bloxesRow} style={{ width: boxDim, height: boxDim, border: '1px solid black'}}>
           {grid.map((rows, i) => {
             return (
               <div key={i} className={classes.column}>
@@ -130,7 +132,7 @@ const App = () => {
             );
           })}
         </div>
-        <div className={classes.bloxesRow} style={{ width: boxDim, height: boxDim, border: '1px solid black', margin: '5px'}}>
+        <div className={classes.bloxesRow} style={{ width: boxDim, height: boxDim, border: '1px solid black'}}>
           {drawGrid.map((rows, i) => {
             return (
               <div key={i} className={classes.column}>
